@@ -1,2 +1,0 @@
-C:\CODE\Algorithm\Assembly_Line_Scheduling\x64\Debug\Assembly_Line_Scheduling.exe
-C:\CODE\Algorithm\Alogrithm-sheet\Assembly_Line_Scheduling\x64\Debug\Assembly_Line_Scheduling.exe
