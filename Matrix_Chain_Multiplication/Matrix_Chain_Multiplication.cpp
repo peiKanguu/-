@@ -1,28 +1,28 @@
 #include <iostream>
 #include <vector>
-#include <climits> // ÓÃÓÚ INT_MAX
+#include <climits> // ç”¨äº INT_MAX
 
 using namespace std;
 
-// º¯ÊıÉùÃ÷
+// å‡½æ•°å£°æ˜
 void MatrixChainOrder(const vector<int>& p, vector<vector<int>>& m, vector<vector<int>>& s);
 
 int main() {
-    // Ê¾ÀıÊäÈë£º¾ØÕóµÄÎ¬¶ÈÊı×é
+    // ç¤ºä¾‹è¾“å…¥ï¼šçŸ©é˜µçš„ç»´åº¦æ•°ç»„
     vector<int> d = { 5, 4, 6, 2, 7 };
 
-    // ¾ØÕóÊıÁ¿
+    // çŸ©é˜µæ•°é‡
     int n = d.size() - 1;
 
-    // ³õÊ¼»¯ m ºÍ s ¾ØÕóÎª 5x5 ´óĞ¡£¬µÚÒ»ÅÅºÍµÚÒ»ÁĞ¶¼³õÊ¼»¯Îª 0
+    // åˆå§‹åŒ– m å’Œ s çŸ©é˜µä¸º 5x5 å¤§å°ï¼Œç¬¬ä¸€æ’å’Œç¬¬ä¸€åˆ—éƒ½åˆå§‹åŒ–ä¸º 0
     vector<vector<int>> m(5, vector<int>(5, 0));
     vector<vector<int>> s(5, vector<int>(5, 0));
 
-    // ¼ÆËã×îĞ¡³Ë·¨´ÎÊıºÍ·Ö¸îµã
+    // è®¡ç®—æœ€å°ä¹˜æ³•æ¬¡æ•°å’Œåˆ†å‰²ç‚¹
     MatrixChainOrder(d, m, s);
 
-    // Êä³ö m ¾ØÕó
-    cout << "m ¾ØÕó:" << endl;
+    // è¾“å‡º m çŸ©é˜µ
+    cout << "m çŸ©é˜µ:" << endl;
     for (const auto& row : m) {
         for (int val : row) {
             cout << val << " ";
@@ -30,8 +30,8 @@ int main() {
         cout << endl;
     }
 
-    // Êä³ö s ¾ØÕó
-    cout << "s ¾ØÕó:" << endl;
+    // è¾“å‡º s çŸ©é˜µ
+    cout << "s çŸ©é˜µ:" << endl;
     for (const auto& row : s) {
         for (int val : row) {
             cout << val << " ";
@@ -45,16 +45,16 @@ int main() {
 void MatrixChainOrder(const vector<int>& d, vector<vector<int>>& m, vector<vector<int>>& s) {
     int n = d.size() - 1;
 
-    // l ÊÇÁ´µÄ³¤¶È
+    // l æ˜¯é“¾çš„é•¿åº¦
     for (int l = 2; l <= n; ++l) {
         for (int i = 1; i <= n - l + 1; ++i) {
             int j = i + l - 1;
-            m[i][j] = INT_MAX; // ³õÊ¼»¯ÎªÎŞÇî´ó
+            m[i][j] = INT_MAX; // åˆå§‹åŒ–ä¸ºæ— ç©·å¤§
             for (int k = i; k < j; ++k) {
                 int q = m[i][k] + m[k + 1][j] + d[i - 1] * d[k] * d[j];
                 if (q < m[i][j]) {
                     m[i][j] = q;
-                    s[i][j] = k; // ¼ÇÂ¼·Ö¸îµã
+                    s[i][j] = k; // è®°å½•åˆ†å‰²ç‚¹
                 }
             }
         }
@@ -67,29 +67,29 @@ void MatrixChainOrder(const vector<int>& d, vector<vector<int>>& m, vector<vecto
 
 //#include <iostream>
 //#include <vector>
-//#include <climits> // ÓÃÓÚ INT_MAX
+//#include <climits> // ç”¨äº INT_MAX
 //
 //using namespace std;
 //
-//// º¯ÊıÉùÃ÷
+//// å‡½æ•°å£°æ˜
 //void MatrixChainOrder(const vector<int>& p, vector<vector<int>>& m, vector<vector<int>>& s);
 //
 //int main() {
-//    // Ê¾ÀıÊäÈë£º¾ØÕóµÄÎ¬¶ÈÊı×é
+//    // ç¤ºä¾‹è¾“å…¥ï¼šçŸ©é˜µçš„ç»´åº¦æ•°ç»„
 //    vector<int> d = { 5, 4, 6, 2, 7 };
 //
-//    // ¾ØÕóÊıÁ¿
+//    // çŸ©é˜µæ•°é‡
 //    int n = d.size() - 1;
 //
-//    // ³õÊ¼»¯ m ºÍ s ¾ØÕó
+//    // åˆå§‹åŒ– m å’Œ s çŸ©é˜µ
 //    vector<vector<int>> m(n, vector<int>(n, 0));
 //    vector<vector<int>> s(n, vector<int>(n, 0));
 //
-//    // ¼ÆËã×îĞ¡³Ë·¨´ÎÊıºÍ·Ö¸îµã
+//    // è®¡ç®—æœ€å°ä¹˜æ³•æ¬¡æ•°å’Œåˆ†å‰²ç‚¹
 //    MatrixChainOrder(d, m, s);
 //
-//    // Êä³ö m ¾ØÕó
-//    cout << "m ¾ØÕó:" << endl;
+//    // è¾“å‡º m çŸ©é˜µ
+//    cout << "m çŸ©é˜µ:" << endl;
 //    for (const auto& row : m) {
 //        for (int val : row) {
 //            cout << val << " ";
@@ -97,8 +97,8 @@ void MatrixChainOrder(const vector<int>& d, vector<vector<int>>& m, vector<vecto
 //        cout << endl;
 //    }
 //
-//    // Êä³ö s ¾ØÕó
-//    cout << "s ¾ØÕó:" << endl;
+//    // è¾“å‡º s çŸ©é˜µ
+//    cout << "s çŸ©é˜µ:" << endl;
 //    for (const auto& row : s) {
 //        for (int val : row) {
 //            cout << val << " ";
@@ -110,23 +110,28 @@ void MatrixChainOrder(const vector<int>& d, vector<vector<int>>& m, vector<vecto
 //}
 //
 //void MatrixChainOrder(const vector<int>& d, vector<vector<int>>& m, vector<vector<int>>& s) {
-//    int n = d.size() - 1; // ¾ØÕóÊıÁ¿
+//    int n = d.size() - 1; // çŸ©é˜µæ•°é‡
 //
-//    // ³õÊ¼»¯ m[i][i] Îª 0
+//    // åˆå§‹åŒ– m[i][i] ä¸º 0
 //    for (int i = 0; i < n; ++i) {
 //        m[i][i] = 0;
 //    }
 //
-//    // l ÊÇÁ´µÄ³¤¶È
+//    // l æ˜¯é“¾çš„é•¿åº¦
 //    for (int l = 2; l <= n; ++l) {
+//        // iæ˜¯çŸ©é˜µé“¾å¼€å§‹çš„ä½ç½®
 //        for (int i = 0; i <= n - l; ++i) {
-//            int j = i + l - 1;
-//            m[i][j] = INT_MAX; // ³õÊ¼»¯ÎªÎŞÇî´ó
+//            int j = i + l - 1; // jæ˜¯çŸ©é˜µé“¾ç»“æŸçš„ä½ç½®
+//            m[i][j] = INT_MAX; // åˆå§‹åŒ–ä¸ºæ— ç©·å¤§
+//
+//            // é€‰æ‹©æœ€ä½³åˆ†å‰²ç‚¹k
 //            for (int k = i; k < j; ++k) {
+//                // è®¡ç®—åœ¨ä½ç½®kåˆ†å‰²æ—¶çš„ä¹˜æ³•æ¬¡æ•°
 //                int q = m[i][k] + m[k + 1][j] + d[i] * d[k + 1] * d[j + 1];
-//                if (q < m[i][j]) {
+//                 // å¦‚æœå½“å‰çš„ä¹˜æ³•æ¬¡æ•°æ›´å°ï¼Œåˆ™æ›´æ–°æ•°æ®                
+//                 if (q < m[i][j]) {
 //                    m[i][j] = q;
-//                    s[i][j] = k+1; // ¼ÇÂ¼·Ö¸îµã
+//                    s[i][j] = k+1; // è®°å½•åˆ†å‰²ç‚¹
 //                }
 //            }
 //        }
