@@ -11,6 +11,7 @@
 *.tlog
 *.lastbuildstate
 *·gitignore
+*.txt
 
 # 忽略所有二进制文件
 *.o
