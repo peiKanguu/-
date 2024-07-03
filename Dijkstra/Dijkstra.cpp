@@ -1,8 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <climits>
-#include <set>
-#include <algorithm> // For std::min_element
 
 using namespace std;
 
@@ -46,7 +44,7 @@ int main() {
 
     for (int y = 1; y < V.size(); y++) {
         if (edge[0][y] != INT_MAX) {
-			D[y] = edge[0][y]; // D[y]¾ÍÊÇ³õÊ¼µãµ½yµãµÄ¾àÀë
+			D[y] = edge[0][y]; // D[y]å°±æ˜¯åˆå§‹ç‚¹åˆ°yç‚¹çš„è·ç¦»
         }
     }
 
@@ -55,7 +53,7 @@ int main() {
         int y = -1;
 
 		// Find the vertex y in Y that minimizes D[y]
-		// Ò²¾ÍÊÇÕÒµ½YÖÐD[y]×îÐ¡µÄµã y=D[y]
+		// ä¹Ÿå°±æ˜¯æ‰¾åˆ°Yä¸­D[y]æœ€å°çš„ç‚¹ y=D[y]
         for (int i = 0; i < Y.size(); i++) {
             if (D[Y[i]] < minDist) {
                 minDist = D[Y[i]];
