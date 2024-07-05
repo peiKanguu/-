@@ -1,0 +1,135 @@
+## **Memoization**(备忘录)
+Top-down
+备忘录技术（Memoization）是动态规划（Dynamic Programming）中的一种优化方法，用于提高递归算法的效率。**其核心思想是将已经计算过的子问题的结果存储起来，以便在以后需要时可以直接使用，而不是重新计算**。这种方法特别适用于具有重叠子问题性质的问题，例如Fibonacci数列计算、背包问题等。
+
+### **备忘录技术的基本步骤**
+
+1. **识别子问题**：确定问题可以分解成哪些子问题，并且这些子问题是否重复计算。
+2. **存储结果**：使用一个数据结构（如数组、字典、哈希表等）来存储已经计算过的子问题的结果。
+3. **检查结果**：在计算一个子问题之前，首先检查存储结构中是否已经有该子问题的结果。如果有，直接返回结果；如果没有，则计算该子问题并存储结果。
+### **Top-down Fibonacci**
+
+原本的斐波那契：时间复杂度为T(n^2)
+```C++
+#include <iostream>
+
+long long fibonacci(int n) {
+    if (n <= 1) {
+        return n;
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+int main() {
+    int n;
+    std::cout << "输入你想计算的Fibonacci数列的项数: ";
+    std::cin >> n;
+    std::cout << "Fibonacci(" << n << ") = " << fibonacci(n) << std::endl;
+    return 0;
+}
+```
+
+使用备忘录后：时间复杂度为T(n)
+```C++
+#include <iostream>
+#include <vector>
+
+std::vector<long long> memo;
+
+long long fibonacci(int n) {
+    if (memo[n] != -1) {
+        return memo[n];
+    }
+    if (n <= 1) {
+        return n;
+    }
+    memo[n] = fibonacci(n - 1) + fibonacci(n - 2);
+    return memo[n];
+}
+
+int main() {
+    int n;
+    std::cout << "输入你想计算的Fibonacci数列的项数: ";
+    std::cin >> n;
+
+    // 初始化memo数组，并将所有元素设置为-1，表示未计算
+    memo = std::vector<long long>(n + 1, -1);
+
+    std::cout << "Fibonacci(" << n << ") = " << fibonacci(n) << std::endl;
+
+    return 0;
+}
+```
+
+### **备忘录技术的优点**
+
+1. **提高效率**：通过避免重复计算显著减少了时间复杂度。
+2. **简化代码**：使用备忘录技术可以使递归代码更加简洁和直观。
+3. **空间换时间**：通过使用额外的存储空间（如数组或哈希表），换取时间效率的提升。
+---
+
+## **Tabulation**(表格法)
+Down-top
+表格法通过构建一个表格来保存子问题的解，并从最简单的子问题开始逐步解决更复杂的问题。这种方法避免了递归调用和函数调用的开销，通常效率更高。
+
+### **表格法的基本步骤**
+
+1. **定义表格**：创建一个数组或矩阵来存储子问题的解。
+2. **初始化表格**：根据问题的基本情况初始化表格的初始值。
+3. **填充表格**：按照一定的顺序填充表格，从基本情况开始，逐步解决更复杂的子问题。
+4. **读取结果**：最终结果通常保存在表格的最后一个单元格中。
+
+### 示例：使用表格法计算Fibonacci数列
+
+以下是使用C++实现的表格法计算Fibonacci数列的代码：
+```C++
+#include <iostream>
+#include <vector>
+
+long long fibonacci(int n) {
+    if (n <= 1) {
+        return n;
+    }
+
+    // 创建一个数组来存储Fibonacci数
+    // 初始化为0
+    // 函数内创建表格
+    std::vector<long long> table(n + 1, 0);
+    
+    // 初始化基本情况
+    table[0] = 0;
+    table[1] = 1;
+    
+    // 填充表格
+    for (int i = 2; i <= n; ++i) {
+        table[i] = table[i - 1] + table[i - 2];
+    }
+    
+    // 最终结果
+    return table[n];
+}
+
+int main() {
+    int n;
+    std::cout << "输入你想计算的Fibonacci数列的项数: ";
+    std::cin >> n;
+
+    std::cout << "Fibonacci(" << n << ") = " << fibonacci(n) << std::endl;
+
+    return 0;
+}
+
+```
+
+### **表格法的优点**
+
+1. **避免递归开销**：通过迭代的方式解决问题，避免了递归调用的开销。
+2. **空间效率**：虽然表格法需要额外的存储空间，但可以通过只保留必要的中间结果来优化空间使用。
+3. **时间效率**：通过一次填表，避免了重复计算，时间复杂度通常较低。
+
+### 对比
+
+- **备忘录技术（Memoization）**：自顶向下，通过递归和缓存子问题结果来避免重复计算。
+- **表格法（Tabulation）**：自底向上，通过迭代构建表格来存储子问题结果。
+
+两种方法的选择取决于具体问题和实现的便利性，但在大多数情况下，表格法通常更为高效。
